@@ -11,7 +11,7 @@ void Game::Start(void)
 		return;
 	
 	//Set up game resources
-	_mainWindow.create(sf::VideoMode(1024, 768, 32), "Magician Guy");			//Main Window
+	_mainWindow.create(sf::VideoMode(640, 480, 4), "Magician Guy");			//Main Window
 
 
 
