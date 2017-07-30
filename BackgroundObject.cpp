@@ -1,12 +1,10 @@
 #include "stdafx.h"
 #include "BackgroundObject.h"
 
-//Constructor - sets sprite location
-BackgroundObject::BackgroundObject(float x, float y) :
-	x_c(x),
-	y_c(y)
+//Constructor - sets sprite absolute location
+BackgroundObject::BackgroundObject() 
 {
-
+	Load("ArtAssets/dBlue16.png");
 }
 
 //Destructor

@@ -1,7 +1,11 @@
 #pragma once
 #include "stdafx.h"
 #include "Game.h"
+#include "VisibleGameObject.h"
+#include "BackgroundObject.h"
 
+//To Do:
+//Print a sprite
 
 
 //Start - For setting up resources and containing the game
@@ -13,7 +17,13 @@ void Game::Start(void)
 	//Set up game resources
 	_mainWindow.create(sf::VideoMode(640, 480, 4), "Magician Guy");			//Main Window
 
+		//Set up objects
+	test1.SetPosition(400, 400);
+	test1.Draw(_mainWindow);
 
+
+
+	_gameState = Playing;
 
 	//Game Loop
 	while (!IsExiting()) 
@@ -31,7 +41,21 @@ void Game::Start(void)
 //GameLoop - For regularly updating the game.
 void Game::GameLoop(void)
 {
-	_gameState = Playing;
+	
+
+	switch (_gameState)
+	{
+	case Playing:
+		test1.Draw(_mainWindow);
+		_mainWindow.display();
+		
+		break;
+	default:
+		break;
+	}
+
+
+
 	return;
 }
 
@@ -49,3 +73,4 @@ bool Game::IsExiting(void)
 //Static class variables need to be initialised (standard practice)
 sf::RenderWindow Game::_mainWindow;
 Game::GameState Game::_gameState;
+BackgroundObject Game::test1;

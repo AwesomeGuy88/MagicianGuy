@@ -5,7 +5,7 @@
 class BackgroundObject : public VisibleGameObject
 {
 public:
-	BackgroundObject(float x, float y);
+	BackgroundObject();
 	virtual ~BackgroundObject();
 
 	void DrawToCanvas(float x_o, float y_o);
