@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "VisibleGameObject.h"
+#include "Game.h"
 
 //Constructor - Sets flag of the object	without trigerring default constructor of isLoaded
 VisibleGameObject::VisibleGameObject()
@@ -36,9 +37,20 @@ void VisibleGameObject::Load(std::string filename)
 //Draw - Draws the sprite to the window if conditions are safe.
 void VisibleGameObject::Draw(sf::RenderWindow& renderWindow)
 {
+	float x_o = Game::GetOriginX();
+	float y_o = Game::GetOriginY();
+	float x_temp = x + x_o;	
+	float y_temp = 480 - (y + y_o);
+
 	if (_isLoaded)
 	{
-		renderWindow.draw(_sprite);
+		if (x_temp > 0 && x_temp < Game::SCREEN_WIDTH)
+		{
+			if (y_temp > 0 && y_temp < Game::SCREEN_HEIGHT)
+			{
+				renderWindow.draw(_sprite);
+			}
+		}
 	}
 }
 

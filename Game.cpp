@@ -6,14 +6,16 @@
 #include "SpriteUser.h"
 
 //To Do:
-
+//Map Generation
+	//Read in values from a text file
 
 //On Hold:
 //SpriteUser
+	//To implement origin manipulation
 	//To implement image cache and changing image (animation)
 // Implement gameobjectmanager
 	//Also implement separation between background and objects that need updating
-//
+
 
 
 //Start - For setting up resources and containing the game
@@ -58,9 +60,15 @@ void Game::GameLoop(void)
 	case Playing:
 		_mainWindow.clear(sf::Color(0, 0, 0));
 
-
-		_gameObjectManager.UpdateAll();
-		_gameObjectManager.DrawAll(_mainWindow);
+		//Background Layer
+		_gameObjectManager0.UpdateAll();
+		_gameObjectManager0.DrawAll(_mainWindow);
+		//Layer 1
+		_gameObjectManager1.UpdateAll();
+		_gameObjectManager1.DrawAll(_mainWindow);
+		//Layer 2
+		_gameObjectManager2.UpdateAll();
+		_gameObjectManager2.DrawAll(_mainWindow);
 
 		_mainWindow.display();
 		
@@ -86,19 +94,24 @@ bool Game::IsExiting(void)
 
 void Game::InitialiseObjects()
 {
+	
 	BackgroundObject* test3 = new BackgroundObject();
 	test3->SetPosition(90, 30, fOrigin_x, fOrigin_y);
-	_gameObjectManager.Add("testing", test3);
+	_gameObjectManager0.Add("testing", test3);
 
 	BackgroundObject* test2 = new BackgroundObject();
-	test2->SetPosition(90, 0, fOrigin_x, fOrigin_y);
-	_gameObjectManager.Add("testing1", test2);
+	test2->SetPosition(90, -90, fOrigin_x, fOrigin_y);
+	_gameObjectManager1.Add("testing1", test2);
 
 	SpriteUser* test1 = new SpriteUser();
 	test1->SetPosition(0, 0, fOrigin_x, fOrigin_y);
-	_gameObjectManager.Add("testing2", test1);
+	_gameObjectManager1.Add("testing2", test1);
 
 
+
+	BackgroundObject* test4 = new BackgroundObject();
+	test4->SetPosition(90, 60, fOrigin_x, fOrigin_y);
+	_gameObjectManager2.Add("testing4", test4);
 
 }
 
@@ -111,9 +124,20 @@ sf::RenderWindow& Game::GetWindow()
 }
 
 //GetGameObjectManger - Retrieve object manager
-GameObjectManager& Game::GetGameObjectManager()
+GameObjectManager& Game::GetGameObjectManager0()
 {
-	return _gameObjectManager;
+	return _gameObjectManager0;
+}
+
+//GetGameObjectManger - Retrieve object manager
+GameObjectManager& Game::GetGameObjectManager1()
+{
+	return _gameObjectManager1;
+}
+//GetGameObjectManger - Retrieve object manager
+GameObjectManager& Game::GetGameObjectManager2()
+{
+	return _gameObjectManager2;
 }
 
 //GetOriginX - Retrieve origin x coordinate
@@ -136,4 +160,6 @@ Game::GameState Game::_gameState;
 float Game::fOrigin_x;
 float Game::fOrigin_y;
 sf::Clock Game::clock;
-GameObjectManager Game::_gameObjectManager;
+GameObjectManager Game::_gameObjectManager0;
+GameObjectManager Game::_gameObjectManager1;
+GameObjectManager Game::_gameObjectManager2;

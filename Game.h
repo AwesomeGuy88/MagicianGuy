@@ -16,7 +16,10 @@ class Game
 public:
 	static void Start(void);
 
-	static GameObjectManager& GetGameObjectManager();
+	static GameObjectManager& GetGameObjectManager0();
+	static GameObjectManager& GetGameObjectManager1();
+	static GameObjectManager& GetGameObjectManager2();
+
 	static sf::RenderWindow& GetWindow();
 	static float& GetOriginX();
 	static float& GetOriginY();
@@ -41,7 +44,9 @@ private:
 	static sf::RenderWindow _mainWindow;
 
 	static float fOrigin_x, fOrigin_y;
-	static GameObjectManager _gameObjectManager;
+	static GameObjectManager _gameObjectManager0; //Background Layer
+	static GameObjectManager _gameObjectManager1; //Layer 1
+	static GameObjectManager _gameObjectManager2; //Layer 2
 };
 
 

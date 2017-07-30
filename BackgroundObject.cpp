@@ -4,7 +4,7 @@
 //Constructor - sets sprite absolute location
 BackgroundObject::BackgroundObject() 
 {
-	Load("ArtAssets/dBlue16.png");
+	Load("ArtAssets/Environment/GrassTile.fw.png");
 }
 
 //Destructor
