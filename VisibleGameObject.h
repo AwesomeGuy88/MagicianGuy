@@ -12,7 +12,7 @@ public:
 
 	virtual void Load(std::string filename);
 	virtual void Draw(sf::RenderWindow & window);
-	virtual void Update(float elapsedTime);
+	virtual void Update(float elapsedTime, float x_o, float y_o);
 
 	virtual void SetPosition(float x, float y, float x_o, float y_o);
 	virtual sf::Vector2f GetPosition() const;

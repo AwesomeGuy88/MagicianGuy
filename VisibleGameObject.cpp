@@ -43,7 +43,7 @@ void VisibleGameObject::Draw(sf::RenderWindow& renderWindow)
 }
 
 //Update - Update the image in response to user interaction.
-void VisibleGameObject::Update(float elapsedTime)
+void VisibleGameObject::Update(float elapsedTime, float x_o, float y_o)
 {
 
 }

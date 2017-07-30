@@ -6,7 +6,7 @@
 #include "stdafx.h"
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
-#include <SFML/Window.hpp>
+#include "GameObjectManager.h"
 #include "BackgroundObject.h"
 #include "SpriteUser.h"
 
@@ -15,6 +15,11 @@ class Game
 {
 public:
 	static void Start(void);
+
+	static GameObjectManager& GetGameObjectManager();
+	static sf::RenderWindow& GetWindow();
+	static float& GetOriginX();
+	static float& GetOriginY();
 
 	static sf::Clock clock;
 
@@ -25,6 +30,8 @@ private:
 	static void GameLoop(void);
 	static bool IsExiting(void);
 
+	static void InitialiseObjects();
+
 
 	enum GameState {
 		Uninitialized, Paused, ShowingMenu, Playing, Exiting
@@ -32,11 +39,9 @@ private:
 
 	static GameState _gameState;
 	static sf::RenderWindow _mainWindow;
-	static BackgroundObject test1;
-	static SpriteUser Game::test2;
-	static float origin_x, origin_y;
 
-	static sf::Time t2;
+	static float fOrigin_x, fOrigin_y;
+	static GameObjectManager _gameObjectManager;
 };
 
 
