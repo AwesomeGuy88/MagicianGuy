@@ -14,7 +14,7 @@ public:
 	virtual void Draw(sf::RenderWindow & window);
 	virtual void Update(float elapsedTime);
 
-	virtual void SetPosition(float x, float y);
+	virtual void SetPosition(float x, float y, float x_o, float y_o);
 	virtual sf::Vector2f GetPosition() const;
 	virtual bool IsLoaded() const;
 
@@ -25,6 +25,7 @@ public:
 
 protected:
 	sf::Sprite& GetSprite();
+	float x, y;
 
 private:
 	sf::Sprite _sprite;

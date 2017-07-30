@@ -48,12 +48,17 @@ void VisibleGameObject::Update(float elapsedTime)
 
 }
 
-//SetPosition - Sets the position data of the sprite if conditions are safe.
-void VisibleGameObject::SetPosition(float x, float y)
+//SetPosition - Sets the position data of the sprite relative to the origin
+void VisibleGameObject::SetPosition(float x, float y, float x_o, float y_o)
 {
+	this->x = x;
+	this->y = y;
+	
 	if (_isLoaded)
 	{
-		_sprite.setPosition(x, y);
+		float x_temp = x + x_o;				//Increasing x corresponds to further to the right of the screen
+		float y_temp = 480 - (y + y_o);		//Increasing y corresponds to further up the screen
+		_sprite.setPosition(x_temp, y_temp);
 	}
 }
 
