@@ -36,7 +36,7 @@ void Game::Start(void)
 		//Objects
 	InitialiseObjects();
 	_dataHandler.GetMapData("map_data.txt");
-	_dataHandler.PrintMapData();
+	_dataHandler.CreateMap(&_gameObjectManager0, fOrigin_x, fOrigin_y);
 
 		//Control flow
 	_gameState = Playing;

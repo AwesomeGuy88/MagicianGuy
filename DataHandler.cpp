@@ -1,6 +1,8 @@
 #pragma once
 #include "stdafx.h"
 #include "DataHandler.h"
+#include "BackgroundObject.h"
+#include "GameObjectManager.h"
 #include <string>
 #include <fstream>
 #include <iostream> //For debugging
@@ -69,6 +71,33 @@ void DataHandler::GetMapData(std::string szFileName)
 		nECount++;
 	}
 	nNumMapElements = nECount;
+}
+
+//CreateMap - Creates objects according to map data
+void DataHandler::CreateMap(GameObjectManager* _gameObjectManager, float fOrigin_x, float fOrigin_y)
+{
+
+	for (int i = 0; i < nNumMapElements; i++)
+	{
+		BackgroundObject* temp = new BackgroundObject();
+
+		switch (elements[i].nObjectId)
+		{
+		case 0:
+			temp->Load("ArtAssets/Environment/GrassTile.fw.png");
+			break;
+		case 1:
+			temp->Load("ArtAssets/Environment/ConcreteTile.fw.png");
+			break;
+		default:
+			break;
+		}
+
+		temp->SetPosition(elements[i].fX_pos, elements[i].fY_pos, fOrigin_x, fOrigin_y);
+		_gameObjectManager->Add(elements[i].szName, temp);
+
+	}
+
 }
 
 void DataHandler::PrintMapData()

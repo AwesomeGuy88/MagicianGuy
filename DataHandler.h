@@ -1,4 +1,5 @@
 #pragma once
+#include "GameObjectManager.h"
 #include <string>
 #define MAX_MAP_ELEMENTS 200
 
@@ -10,7 +11,8 @@ public:
 	~DataHandler();
 	
 	int GetNumMapElements();
-	void GetMapData(std::string szFileName);
+	void GetMapData(std::string szFileName); 
+	void CreateMap(GameObjectManager* _gameObjectManager, float fOrigin_x, float fOrigin_y);
 
 	void PrintMapData(); //For Debugging
 
