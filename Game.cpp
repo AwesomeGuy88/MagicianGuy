@@ -15,6 +15,9 @@
 	//To implement image cache and changing image (animation)
 // Implement gameobjectmanager
 	//Also implement separation between background and objects that need updating
+// DataHandler
+	//Convert to vector, to reduce wastage of space
+	//Can break code if going beyond the limit of number of elements
 
 
 
@@ -30,10 +33,10 @@ void Game::Start(void)
 		//Origin 
 	fOrigin_x = 320;
 	fOrigin_y = 240;
-
-
 		//Objects
 	InitialiseObjects();
+	_dataHandler.GetMapData("map_data.txt");
+	_dataHandler.PrintMapData();
 
 		//Control flow
 	_gameState = Playing;
@@ -163,3 +166,4 @@ sf::Clock Game::clock;
 GameObjectManager Game::_gameObjectManager0;
 GameObjectManager Game::_gameObjectManager1;
 GameObjectManager Game::_gameObjectManager2;
+DataHandler Game::_dataHandler;

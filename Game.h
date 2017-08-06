@@ -9,6 +9,7 @@
 #include "GameObjectManager.h"
 #include "BackgroundObject.h"
 #include "SpriteUser.h"
+#include "DataHandler.h"
 
 
 class Game
@@ -47,6 +48,7 @@ private:
 	static GameObjectManager _gameObjectManager0; //Background Layer
 	static GameObjectManager _gameObjectManager1; //Layer 1
 	static GameObjectManager _gameObjectManager2; //Layer 2
+	static DataHandler _dataHandler;
 };
 
 
