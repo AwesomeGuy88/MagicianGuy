@@ -1,15 +1,17 @@
 #pragma once
 #include "stdafx.h"
 #include "DataHandler.h"
-#include "BackgroundObject.h"
+#include "SpriteBackground.h"
 #include "GameObjectManager.h"
+#include "SpriteObstacle.h"
 #include <string>
 #include <fstream>
 #include <iostream> //For debugging
 
 
 DataHandler::DataHandler() 
-	: nNumMapElements(0)
+	: nNumMapElements0(0),
+	nNumMapElements1(0)
 {
 
 }
@@ -20,9 +22,22 @@ DataHandler::~DataHandler()
 
 }
 
-int DataHandler::GetNumMapElements()
+void DataHandler::ExtractDataAndCreate(GameObjectManager* pGM0, GameObjectManager* pGM1, GameObjectManager* pGM2, float fOrigin_x, float fOrigin_y)
 {
-	return nNumMapElements;
+
+	GetMapData("map_data0.txt", "map_data1.txt");
+	CreateMap(pGM0, fOrigin_x, fOrigin_y, 0);
+	CreateMap(pGM1, fOrigin_x, fOrigin_y, 1);
+}
+
+int DataHandler::GetNumMapElements(int mode)
+{
+	if (mode == 1) {
+		return nNumMapElements0;
+	}
+	else {
+		return nNumMapElements1;
+	}
 }
 
 //OpenFile - Open stream to file safely
@@ -46,21 +61,22 @@ std::ifstream& DataHandler::OpenFile(std::string szFileName)
 }
 
 //GetMapData - Extracts data from external files
-void DataHandler::GetMapData(std::string szFileName)
+//		In the form of: 1) Name  2) ObjectID  3) Position
+void DataHandler::GetMapData(std::string szFileName0, std::string szFileName1)
 {
 	int nECount = 0;
-	//Open file for reading
-	std::ifstream& pFileStream = OpenFile(szFileName);
+	//Open files for reading
+	std::ifstream& pFileStream = OpenFile(szFileName0);
+	std::ifstream& pFileStream1 = OpenFile(szFileName1);
 
 
-	//Read the file
+	//Background Elements
 	while (!pFileStream.eof())
 	{
-		pFileStream >> elements[nECount].szName;
-		pFileStream >> elements[nECount].nObjectId;
-		pFileStream >> elements[nECount].fX_pos;
-		pFileStream >> elements[nECount].fY_pos;
-
+		pFileStream >> elements0[nECount].szName;
+		pFileStream >> elements0[nECount].nObjectId;
+		pFileStream >> elements0[nECount].fX_pos;
+		pFileStream >> elements0[nECount].fY_pos;
 
 		//Stop if file read failed
 		if (pFileStream.fail())
@@ -70,46 +86,93 @@ void DataHandler::GetMapData(std::string szFileName)
 
 		nECount++;
 	}
-	nNumMapElements = nECount;
-}
+	nNumMapElements0 = nECount;
 
-//CreateMap - Creates objects according to map data
-void DataHandler::CreateMap(GameObjectManager* _gameObjectManager, float fOrigin_x, float fOrigin_y)
-{
 
-	for (int i = 0; i < nNumMapElements; i++)
+	//Obstacle Elements
+	nECount = 0;
+	while (!pFileStream1.eof())
 	{
-		BackgroundObject* temp = new BackgroundObject();
+		pFileStream1 >> elements1[nECount].szName;
+		pFileStream1 >> elements1[nECount].nObjectId;
+		pFileStream1 >> elements1[nECount].fX_pos;
+		pFileStream1 >> elements1[nECount].fY_pos;
 
-		switch (elements[i].nObjectId)
+		//Stop if file read failed
+		if (pFileStream1.fail())
 		{
-		case 0:
-			temp->Load("ArtAssets/Environment/GrassTile.fw.png");
-			break;
-		case 1:
-			temp->Load("ArtAssets/Environment/ConcreteTile.fw.png");
-			break;
-		default:
 			break;
 		}
 
-		temp->SetPosition(elements[i].fX_pos, elements[i].fY_pos, fOrigin_x, fOrigin_y);
-		_gameObjectManager->Add(elements[i].szName, temp);
+		nECount++;
+	}
+	nNumMapElements1 = nECount;
+}
 
+//CreateMap - Creates objects according to data
+//		mode - (0) Background, (1) Obstacles
+void DataHandler::CreateMap(GameObjectManager* _gameObjectManager, float fOrigin_x, float fOrigin_y, int mode)
+{
+
+	if (mode == 0) {	//Background
+		for (int i = 0; i < nNumMapElements0; i++)
+		{
+			SpriteBackground* temp = new SpriteBackground();
+
+			switch (elements0[i].nObjectId)
+			{
+			case 0:
+				temp->Load("ArtAssets/Environment/GrassTile.fw.png");
+				break;
+			case 1:
+				temp->Load("ArtAssets/Environment/ConcreteTile.fw.png");
+				break;
+			default:
+				break;
+			}
+
+			temp->SetPosition(elements0[i].fX_pos, elements0[i].fY_pos, fOrigin_x, fOrigin_y);
+			_gameObjectManager->Add(elements0[i].szName, temp);
+
+		}
+	}
+	else if(mode == 1) {	//Obstacles
+		for (int i = 0; i < nNumMapElements1; i++)
+		{
+			SpriteObstacle* temp = new SpriteObstacle();
+
+			switch (elements1[i].nObjectId)
+			{
+			case 0:
+				temp->Load("ArtAssets/Environment/Wall1.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 1:
+				temp->Load("ArtAssets/Environment/Wall2.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			default:
+				break;
+			}
+
+			temp->SetPosition(elements1[i].fX_pos, elements1[i].fY_pos, fOrigin_x, fOrigin_y);
+			_gameObjectManager->Add(elements1[i].szName, temp);
+
+		}
 	}
 
 }
 
 void DataHandler::PrintMapData()
 {
-	for (int i = 0; i < nNumMapElements; i++)
+	for (int i = 0; i < nNumMapElements1; i++)
 	{
 		std::cout << "Map Data: " << std::endl
 			<< "Element " << i << ":"
-			<< elements[i].szName << ", "
-			<< elements[i].nObjectId << ", "
-			<< elements[i].fX_pos << ", "
-			<< elements[i].fY_pos << ", "
+			<< elements1[i].szName << ", "
+			<< elements1[i].nObjectId << ", "
+			<< elements1[i].fX_pos << ", "
+			<< elements1[i].fY_pos << ", "
 			<< std::endl;
 	}
 }

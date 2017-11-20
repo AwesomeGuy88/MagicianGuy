@@ -1,21 +1,21 @@
 #include "stdafx.h"
-#include "BackgroundObject.h"
+#include "SpriteObstacle.h"
 
 //Constructor - sets sprite absolute location
-BackgroundObject::BackgroundObject() 
+SpriteObstacle::SpriteObstacle()
 {
 	Load("ArtAssets/Environment/GrassTile.fw.png");
 }
 
 //Destructor
-BackgroundObject::~BackgroundObject()
+SpriteObstacle::~SpriteObstacle()
 {
 
 }
 
 //DrawToCanvas - Draws the object to the canvas according to the
 //coordinates of the origin.
-void BackgroundObject::DrawToCanvas(float x_o, float y_o)
+void SpriteObstacle::DrawToCanvas(float x_o, float y_o)
 {
 
 

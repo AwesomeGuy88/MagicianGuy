@@ -1,7 +1,8 @@
 #pragma once
 #include "GameObjectManager.h"
 #include <string>
-#define MAX_MAP_ELEMENTS 200
+#define MAX_MAP_ELEMENTS 500
+#define MAX_OBSTACLE_ELEMENTS 500
 
 
 class DataHandler
@@ -9,11 +10,13 @@ class DataHandler
 public:
 	DataHandler();
 	~DataHandler();
-	
-	int GetNumMapElements();
-	void GetMapData(std::string szFileName); 
-	void CreateMap(GameObjectManager* _gameObjectManager, float fOrigin_x, float fOrigin_y);
 
+	void ExtractDataAndCreate(GameObjectManager* GM0, GameObjectManager* GM1, GameObjectManager* GM2, 
+		float fOrigin_x, float fOrigin_y);
+
+	int GetNumMapElements(int mode);
+	void GetMapData(std::string szFileName0, std::string szFileName1);
+	void CreateMap(GameObjectManager* _gameObjectManager, float fOrigin_x, float fOrigin_y, int mode);
 	void PrintMapData(); //For Debugging
 
 private:
@@ -26,8 +29,11 @@ private:
 		float fY_pos;
 	};
 
-	mapElement elements[MAX_MAP_ELEMENTS] = {};
-	int nNumMapElements;
+	mapElement elements0[MAX_MAP_ELEMENTS] = {};
+	int nNumMapElements0;
+
+	mapElement elements1[MAX_OBSTACLE_ELEMENTS] = {};
+	int nNumMapElements1;
 	
 
 };

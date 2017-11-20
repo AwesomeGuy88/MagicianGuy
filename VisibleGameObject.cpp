@@ -4,7 +4,8 @@
 
 //Constructor - Sets flag of the object	without trigerring default constructor of isLoaded
 VisibleGameObject::VisibleGameObject()
-	: _isLoaded(false)
+	: _isLoaded(false),
+	_objectID("notSet")
 {
 }
 
@@ -74,6 +75,19 @@ void VisibleGameObject::SetPosition(float x, float y, float x_o, float y_o)
 	}
 }
 
+//SetObjectID - Set unique ID
+void VisibleGameObject::SetObjectID(std::string ID)
+{
+	_objectID = ID;
+}
+
+
+//GetObjectID - Retrieve unique ID
+std::string VisibleGameObject::GetObjectID()
+{
+	return _objectID;
+}
+
 
 //GetPosition - Retrieve position from data stored within class
 sf::Vector2f VisibleGameObject::GetPosition() const
@@ -97,7 +111,6 @@ bool VisibleGameObject::IsLoaded() const
 	return _isLoaded;
 }
 
-
 float VisibleGameObject::GetHeight() const
 {
 	return _sprite.getLocalBounds().height;
@@ -106,6 +119,11 @@ float VisibleGameObject::GetHeight() const
 float VisibleGameObject::GetWidth() const
 {
 	return _sprite.getLocalBounds().width;
+}
+
+sf::Texture VisibleGameObject::GetTexture() const
+{
+	return _image;
 }
 
 //GetBoundingRect - Using sprite properties, calculates the dimensions of the bounding

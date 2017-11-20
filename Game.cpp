@@ -2,12 +2,11 @@
 #include "stdafx.h"
 #include "Game.h"
 #include "VisibleGameObject.h"
-#include "BackgroundObject.h"
+#include "SpriteBackground.h"
 #include "SpriteUser.h"
 
 //To Do:
-//Map Generation
-	//Read in values from a text file
+//Object Collisions
 
 //On Hold:
 //SpriteUser
@@ -30,13 +29,15 @@ void Game::Start(void)
 	//Set up game resources
 		//Main window
 	_mainWindow.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 4), "Magician Guy");
-		//Origin 
+		//Origin (Camera Location)
 	fOrigin_x = 320;
 	fOrigin_y = 240;
 		//Objects
 	InitialiseObjects();
-	_dataHandler.GetMapData("map_data.txt");
-	_dataHandler.CreateMap(&_gameObjectManager0, fOrigin_x, fOrigin_y);
+	GameObjectManager* pGM0 = &_gameObjectManager0;
+	GameObjectManager* pGM1 = &_gameObjectManager1;
+	GameObjectManager* pGM2 = &_gameObjectManager2;
+	_dataHandler.ExtractDataAndCreate(pGM0, pGM1, pGM2, fOrigin_x, fOrigin_y);
 
 		//Control flow
 	_gameState = Playing;
@@ -98,11 +99,11 @@ bool Game::IsExiting(void)
 void Game::InitialiseObjects()
 {
 	
-	BackgroundObject* test3 = new BackgroundObject();
+	SpriteBackground* test3 = new SpriteBackground();
 	test3->SetPosition(90, 30, fOrigin_x, fOrigin_y);
 	_gameObjectManager0.Add("testing", test3);
 
-	BackgroundObject* test2 = new BackgroundObject();
+	SpriteBackground* test2 = new SpriteBackground();
 	test2->SetPosition(90, -90, fOrigin_x, fOrigin_y);
 	_gameObjectManager1.Add("testing1", test2);
 
@@ -110,9 +111,7 @@ void Game::InitialiseObjects()
 	test1->SetPosition(0, 0, fOrigin_x, fOrigin_y);
 	_gameObjectManager1.Add("testing2", test1);
 
-
-
-	BackgroundObject* test4 = new BackgroundObject();
+	SpriteBackground* test4 = new SpriteBackground();
 	test4->SetPosition(90, 60, fOrigin_x, fOrigin_y);
 	_gameObjectManager2.Add("testing4", test4);
 
@@ -162,6 +161,7 @@ sf::RenderWindow Game::_mainWindow;
 Game::GameState Game::_gameState;
 float Game::fOrigin_x;
 float Game::fOrigin_y;
+std::map<std::pair<int, int>, std::string> Game::_occupancyGrid;
 sf::Clock Game::clock;
 GameObjectManager Game::_gameObjectManager0;
 GameObjectManager Game::_gameObjectManager1;

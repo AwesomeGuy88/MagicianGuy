@@ -2,11 +2,11 @@
 #include "VisibleGameObject.h"
 //BackgroundObject - Basic object with no interactions
 
-class BackgroundObject : public VisibleGameObject
+class SpriteBackground : public VisibleGameObject
 {
 public:
-	BackgroundObject();
-	virtual ~BackgroundObject();
+	SpriteBackground();
+	virtual ~SpriteBackground();
 
 	void DrawToCanvas(float x_o, float y_o);
 

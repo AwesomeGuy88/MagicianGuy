@@ -1,0 +1,43 @@
+concrete1 1 -16 -48
+concrete2 1 0 -48
+concrete3 1 16 -48
+
+concrete4 1 -32 -32
+concrete5 1 -16 -32
+concrete6 1 0 -32
+concrete7 1 16 -32
+concrete8 1 32 -32
+
+concrete9 1 -48 -16
+concrete10 1 -32 -16
+concrete11 1 -16 -16
+concrete12 1 0 -16
+concrete13 1 16 -16
+concrete14 1 32 -16
+concrete15 1 48 -16
+
+concrete16 1 -48 0
+concrete17 1 -32 0
+concrete18 1 -16 0
+concrete19 1 0 0
+concrete20 1 16 0
+concrete21 1 32 0
+concrete22 1 48 0
+
+concrete23 1 -48 16
+concrete24 1 -32 16
+concrete25 1 -16 16
+concrete26 1 0 16
+concrete27 1 16 16
+concrete28 1 32 16
+concrete29 1 48 16
+
+concrete30 1 -32 32
+concrete31 1 -16 32
+concrete32 1 0 32
+concrete33 1 16 32
+concrete34 1 32 32
+
+concrete35 1 -16 48
+concrete36 1 0 48
+concrete37 1 16 48
