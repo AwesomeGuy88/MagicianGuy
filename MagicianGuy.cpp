@@ -8,8 +8,8 @@
 
 int main()
 {
-	//Testing::Start();
-	Game::Start();
+	Testing::Start();
+	//Game::Start();
 	return 0;
 }
 

@@ -8,10 +8,8 @@ public:
 	SpriteObstacle();
 	virtual ~SpriteObstacle();
 
-	void DrawToCanvas(float x_o, float y_o);
+	void GetPixelOccupancy(std::string pixel_occupancy[16][16]);
 private:
-	float x_c;
-	float y_c;
 };
 
 

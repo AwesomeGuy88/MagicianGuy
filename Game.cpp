@@ -7,16 +7,22 @@
 
 //To Do:
 //Object Collisions
+//Concept: Individual pixels all occupy a position on a grid. 
+//			Sets of pixels can be removed from the grid as necessary
+//			Sets of pixels can be added to the grid as necessary in a safe manner
+//			Sprites try to move their pixels, failure results in obstacle collision.
 
-//On Hold:
-//SpriteUser
-	//To implement origin manipulation
-	//To implement image cache and changing image (animation)
-// Implement gameobjectmanager
-	//Also implement separation between background and objects that need updating
-// DataHandler
-	//Convert to vector, to reduce wastage of space
-	//Can break code if going beyond the limit of number of elements
+//Required additions:
+// 1.) Image data can be converted to a form of pixel occupancy
+//			ADD FUNCTION TO obstacle
+// 2.) Map class which adds objects and removes objects from the grid
+// 3.) Function for moving objects to demonstrate obstacle collision
+// 4.) Load all obstacle external data into the grid
+
+//Testing:
+// Attempt to add object to the same spot on grid twice should fail
+// Attempt to add object to close position on grid should succeed
+// Behaviour of sprite should demonstrate obstacle collision
 
 
 

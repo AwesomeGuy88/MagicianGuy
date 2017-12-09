@@ -2,6 +2,7 @@
 #include "Testing.h"
 #include "SpriteBackground.h"
 #include "GameObjectManager.h"
+#include "SpriteObstacle.h"
 
 
 
@@ -12,29 +13,24 @@ void Testing::Start(void)
 	std::map<std::pair<int, int>, std::string> occupancyGrid;
 	GameObjectManager _gameObjectManager1; //GameObject manager required to prevent memory leaks
 
-	//Creating Sprite
-	SpriteBackground* temp = new SpriteBackground();
+	//Creating Sprite for testing
+	SpriteObstacle* temp = new SpriteObstacle();
 	temp->SetPosition(0, 0, 320, 240);
 	temp->Load("ArtAssets/Environment/Wall7.fw.png");
-	temp->SetObjectID("obstacleDetected");
+	temp->SetObjectID("ID12");
 	_gameObjectManager1.Add("testing", temp);
 
 
-	//Function - Make a new map class that places object 
-	int x, y;
-	sf::Image tempImage = temp->GetTexture().copyToImage();
-
-	//Loop through pixels in texture
-	for (int j = 0; j < tempImage.sf::Image::getSize().y; j++) {
-		for (int i = 0; i < tempImage.sf::Image::getSize().x; i++) {
-
-			if (tempImage.getPixel(i, j).a != 0) { //Assign to occupancy grid if non alpha values
-				x = temp->GetPosition().x; - tempImage.sf::Image::getSize().x + i;
-				y = temp->GetPosition().y; - tempImage.sf::Image::getSize().y + j;
-				occupancyGrid[std::make_pair(x,y)] = temp->GetObjectID();
-			}
+	//TESTING//
+	std::string pixel_array[16][16];
+	temp->GetPixelOccupancy(pixel_array);
+	for (int i = 0; i < 16; i++) {
+		for (int j = 0; j < 16; j++) {
+			std::cout << pixel_array[i][j] << " ";
 		}
+		std::cout << std::endl;
 	}
+
 
 	return;
 }
