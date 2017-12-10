@@ -26,6 +26,11 @@
 
 
 
+
+//Improvements for later
+// - Explore scalability for map.cpp (Templates? data structures?)
+
+
 //Start - For setting up resources and containing the game
 void Game::Start(void)
 {

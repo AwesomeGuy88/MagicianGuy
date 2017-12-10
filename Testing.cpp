@@ -3,7 +3,7 @@
 #include "SpriteBackground.h"
 #include "GameObjectManager.h"
 #include "SpriteObstacle.h"
-
+#include "Map.h"
 
 
 //Convert image and fill occupancy grid
@@ -11,6 +11,7 @@ void Testing::Start(void)
 {
 	//Initialisation
 	std::map<std::pair<int, int>, std::string> occupancyGrid;
+	Map _testMap;
 	GameObjectManager _gameObjectManager1; //GameObject manager required to prevent memory leaks
 
 	//Creating Sprite for testing
@@ -22,6 +23,21 @@ void Testing::Start(void)
 
 
 	//TESTING//
+	
+	//Map Testing
+	
+	sf::Vector2f position;
+	std::string pixel_occupancy[16][16];
+	bool output;
+	output = _testMap.IsOccupied(pixel_occupancy, position);
+	std::cout << output << std::endl;
+	_testMap.PlaceIntoGrid(temp, position);
+	output = _testMap.IsOccupied(pixel_occupancy, position);
+	std::cout << output << std::endl;
+	
+
+
+	/* PIXEL OCCUPANCY
 	std::string pixel_array[16][16];
 	temp->GetPixelOccupancy(pixel_array);
 	for (int i = 0; i < 16; i++) {
@@ -30,7 +46,7 @@ void Testing::Start(void)
 		}
 		std::cout << std::endl;
 	}
-
+	*/
 
 	return;
 }

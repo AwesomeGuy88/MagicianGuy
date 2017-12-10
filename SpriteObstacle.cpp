@@ -14,6 +14,7 @@ SpriteObstacle::~SpriteObstacle()
 }
 
 //GetPixelOccupancy - Returns the sprite occupancy of its 16x16 grid image.
+//	input - pixel_occupancy[row][column]
 void SpriteObstacle::GetPixelOccupancy(std::string pixel_occupancy[16][16])
 {
 	//Get image data
