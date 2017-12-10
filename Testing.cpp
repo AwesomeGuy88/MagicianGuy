@@ -34,7 +34,9 @@ void Testing::Start(void)
 	_testMap.PlaceIntoGrid(temp, position);
 	output = _testMap.IsOccupied(pixel_occupancy, position);
 	std::cout << output << std::endl;
-	
+	_testMap.RemoveFromGrid(temp, position);
+	output = _testMap.IsOccupied(pixel_occupancy, position);
+	std::cout << output << std::endl;
 
 
 	/* PIXEL OCCUPANCY

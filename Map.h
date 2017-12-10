@@ -13,6 +13,7 @@ public:
 	~Map();
 
 	void PlaceIntoGrid(SpriteObstacle* Obj, sf::Vector2f position);
+	void RemoveFromGrid(SpriteObstacle* Obj, sf::Vector2f position);
 
 
 	bool IsOccupied(std::string pixel_occupancy[16][16], sf::Vector2f position);

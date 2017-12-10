@@ -50,6 +50,30 @@ void Map::PlaceIntoGrid(SpriteObstacle* Obj, sf::Vector2f position)
 	}
 }
 
+
+//RemoveFromGrid - Reverts all occupancy cells to null at specified location
+void Map::RemoveFromGrid(SpriteObstacle* Obj, sf::Vector2f position)
+{
+	int x, y;
+
+	//Get object occupancy data
+	std::string pixel_occupancy[16][16];
+	Obj->GetPixelOccupancy(pixel_occupancy);
+
+	for (int i = 0; i < 16; i++) { //Loop from top right corner
+		for (int j = 0; j > -16; j--) {
+			if (pixel_occupancy[i][j] != "NULL") {
+
+				//Set desired cell to null
+				x = position.x; +j + _occupancy_grid_length / 2;
+				y = position.y; +i + _occupancy_grid_length / 2;
+				_occupancy_grid[y*_occupancy_grid_length + x] = "NULL";
+			}
+		}
+	}
+}
+
+
 //IsOccupied - Checks whether the specified position of an object is occupied or not
 // 1) Loops through pixel occupancy of image and compares to grid
 // 2) Returns true/false based on the result
