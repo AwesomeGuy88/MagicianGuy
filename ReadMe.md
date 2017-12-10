@@ -8,7 +8,9 @@
  
  The objective of the game is for the player to defend a pre-established area. The game is lost if the player character dies or if an enemy is able to capture the defended area.
 
+ 
  **Features**
+ 
  
  *Menu:* Play Game, Credits, Options
  
@@ -18,10 +20,15 @@
 
  *Monetary System:* Soldiers, Soldier Upgrades, Artifacts
  
+ 
  **Development Tools**
+ 
+ 
  Visual Studio 2017, C++, SFML 2.4.2, Git (lol), Trello
  
+ 
 **Progress**
+
 
 Currently finished:
 
