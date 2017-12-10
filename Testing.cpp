@@ -26,6 +26,7 @@ void Testing::Start(void)
 	
 	//Map Testing
 	
+	/*
 	sf::Vector2f position;
 	std::string pixel_occupancy[16][16];
 	bool output;
@@ -37,7 +38,7 @@ void Testing::Start(void)
 	_testMap.RemoveFromGrid(temp, position);
 	output = _testMap.IsOccupied(pixel_occupancy, position);
 	std::cout << output << std::endl;
-
+	*/
 
 	/* PIXEL OCCUPANCY
 	std::string pixel_array[16][16];
