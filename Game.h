@@ -10,6 +10,7 @@
 #include "SpriteBackground.h"
 #include "SpriteUser.h"
 #include "DataHandler.h"
+#include "Map.h"
 
 
 class Game
@@ -20,6 +21,7 @@ public:
 	static GameObjectManager& GetGameObjectManager0();
 	static GameObjectManager& GetGameObjectManager1();
 	static GameObjectManager& GetGameObjectManager2();
+	static Map* GetMap();
 
 	static sf::RenderWindow& GetWindow();
 	static float& GetOriginX();
@@ -50,6 +52,7 @@ private:
 	static GameObjectManager _gameObjectManager1; //Layer 1
 	static GameObjectManager _gameObjectManager2; //Layer 2
 	static DataHandler _dataHandler;
+	static Map _map;
 };
 
 

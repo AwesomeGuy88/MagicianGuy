@@ -8,7 +8,7 @@ public:
 	SpriteObstacle();
 	virtual ~SpriteObstacle();
 
-	void GetPixelOccupancy(std::string pixel_occupancy[16][16]);
+	virtual void GetPixelOccupancy(std::string pixel_occupancy[16][16]);
 private:
 };
 

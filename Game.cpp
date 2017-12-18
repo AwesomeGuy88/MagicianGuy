@@ -40,6 +40,10 @@ void Game::Start(void)
 	//Set up game resources
 		//Main window
 	_mainWindow.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 4), "Magician Guy");
+		//Map
+	
+
+	_map.InitialiseMap();
 		//Origin (Camera Location)
 	fOrigin_x = 320;
 	fOrigin_y = 240;
@@ -61,6 +65,7 @@ void Game::Start(void)
 
 
 	//Clean resources and terminate
+
 	_mainWindow.close();
 
 }
@@ -120,12 +125,22 @@ void Game::InitialiseObjects()
 
 	SpriteUser* test1 = new SpriteUser();
 	test1->SetPosition(0, 0, fOrigin_x, fOrigin_y);
+	test1->SetObjectID("User");
 	_gameObjectManager1.Add("testing2", test1);
 
-	SpriteBackground* test4 = new SpriteBackground();
+	SpriteObstacle* test4 = new SpriteObstacle();
+	test4->Load("ArtAssets/Environment/Wall7.fw.png");
 	test4->SetPosition(90, 60, fOrigin_x, fOrigin_y);
+	test4->SetObjectID("ob01");
 	_gameObjectManager2.Add("testing4", test4);
+	_map.PlaceIntoGrid(test4, test4->GetPosition());
 
+	SpriteObstacle* test5 = new SpriteObstacle();
+	test5->Load("ArtAssets/Mage/MageLeft.fw.png");
+	test5->SetPosition(45, 60, fOrigin_x, fOrigin_y);
+	test5->SetObjectID("ob02");
+	_gameObjectManager2.Add("testing5", test5);
+	_map.PlaceIntoGrid(test5, test5->GetPosition());
 }
 
 
@@ -153,6 +168,13 @@ GameObjectManager& Game::GetGameObjectManager2()
 	return _gameObjectManager2;
 }
 
+//GetGameObjectManger - Retrieve object manager
+Map* Game::GetMap()
+{
+	return &_map;
+}
+
+
 //GetOriginX - Retrieve origin x coordinate
 float& Game::GetOriginX()
 {
@@ -178,3 +200,5 @@ GameObjectManager Game::_gameObjectManager0;
 GameObjectManager Game::_gameObjectManager1;
 GameObjectManager Game::_gameObjectManager2;
 DataHandler Game::_dataHandler;
+Map Game::_map;
+

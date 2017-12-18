@@ -1,8 +1,9 @@
 #pragma once
 #include "stdafx.h"
 #include "VisibleGameObject.h"
+#include "SpriteObstacle.h"
 
-class SpriteUser : public VisibleGameObject
+class SpriteUser : public SpriteObstacle
 {
 public:
 	SpriteUser();

@@ -4,6 +4,8 @@
 #include "SpriteBackground.h"
 #include "GameObjectManager.h"
 #include "SpriteObstacle.h"
+#include "Map.h"
+#include "Game.h"
 #include <string>
 #include <fstream>
 #include <iostream> //For debugging
@@ -137,6 +139,7 @@ void DataHandler::CreateMap(GameObjectManager* _gameObjectManager, float fOrigin
 		}
 	}
 	else if(mode == 1) {	//Obstacles
+		Map* map = Game::GetMap();
 		for (int i = 0; i < nNumMapElements1; i++)
 		{
 			SpriteObstacle* temp = new SpriteObstacle();
@@ -157,6 +160,8 @@ void DataHandler::CreateMap(GameObjectManager* _gameObjectManager, float fOrigin
 
 			temp->SetPosition(elements1[i].fX_pos, elements1[i].fY_pos, fOrigin_x, fOrigin_y);
 			_gameObjectManager->Add(elements1[i].szName, temp);
+			sf::Vector2f init_position(elements1[i].fX_pos, elements1[i].fY_pos);
+			map->PlaceIntoGrid(temp, init_position);
 
 		}
 	}

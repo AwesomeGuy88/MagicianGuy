@@ -4,7 +4,6 @@
 //Constructor - sets sprite absolute location
 SpriteObstacle::SpriteObstacle() 
 {
-	Load("ArtAssets/Environment/GrassTile.fw.png");
 }
 
 //Destructor

@@ -89,12 +89,14 @@ std::string VisibleGameObject::GetObjectID()
 }
 
 
-//GetPosition - Retrieve position from data stored within class
+//GetPosition - Returns actual coordinates.
 sf::Vector2f VisibleGameObject::GetPosition() const
 {
 	if (_isLoaded)
 	{
-		return _sprite.getPosition();
+		sf::Vector2f position(x, y);
+		return position;
+		//return _sprite.getPosition();
 	}
 	return sf::Vector2f();
 }

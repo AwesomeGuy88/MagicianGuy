@@ -1,6 +1,7 @@
 #pragma once
 #include "VisibleGameObject.h"
 #include "SpriteObstacle.h"
+#include <memory>
 
 //To Do
 //Function that places image to occupancy grid
@@ -12,14 +13,16 @@ public:
 	Map();
 	~Map();
 
-	void PlaceIntoGrid(SpriteObstacle* Obj, sf::Vector2f position);
+	void InitialiseMap();
+	bool PlaceIntoGrid(SpriteObstacle* Obj, sf::Vector2f position);
 	void RemoveFromGrid(SpriteObstacle* Obj, sf::Vector2f position);
 
 
-	bool IsOccupied(std::string pixel_occupancy[16][16], sf::Vector2f position);
+	bool IsOccupied(SpriteObstacle* Obj, sf::Vector2f position);
 
 private:
 	//std::map<std::pair<int, int>, std::string> _occupancy_grid;
-	std::string *_occupancy_grid;
-	int _occupancy_grid_length = 1000;
+	std::unique_ptr<std::string> _occupancy_grid;
+	int _occupancy_grid_length;
+	bool _is_initialised;
 };

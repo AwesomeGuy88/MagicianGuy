@@ -10,46 +10,73 @@
 void Testing::Start(void)
 {
 	//Initialisation
-	std::map<std::pair<int, int>, std::string> occupancyGrid;
-	Map _testMap;
 	GameObjectManager _gameObjectManager1; //GameObject manager required to prevent memory leaks
 
-	//Creating Sprite for testing
+	//Creating Sprites for testing
 	SpriteObstacle* temp = new SpriteObstacle();
 	temp->SetPosition(0, 0, 320, 240);
 	temp->Load("ArtAssets/Environment/Wall7.fw.png");
 	temp->SetObjectID("ID12");
 	_gameObjectManager1.Add("testing", temp);
 
+	SpriteObstacle* temp2 = new SpriteObstacle();
+	temp2->SetPosition(0, 0, 320, 240);
+	temp2->Load("ArtAssets/Mage/MageFront.png");
+	temp2->SetObjectID("ID12");
+	_gameObjectManager1.Add("testing2", temp2);
+
+	SpriteObstacle* temp1 = new SpriteObstacle();
+	temp1->SetPosition(0, 0, 320, 240);
+	temp1->Load("ArtAssets/Environment/Wall7.fw.png");
+	temp1->SetObjectID("ID13");
+	_gameObjectManager1.Add("testing1", temp1);
+
 
 	//TESTING//
 	
-	//Map Testing
-	
 	/*
+	//Map Testing
+	//Init
+	bool output;
 	sf::Vector2f position;
 	std::string pixel_occupancy[16][16];
-	bool output;
-	output = _testMap.IsOccupied(pixel_occupancy, position);
-	std::cout << output << std::endl;
-	_testMap.PlaceIntoGrid(temp, position);
-	output = _testMap.IsOccupied(pixel_occupancy, position);
+
+	//Create map
+	Map _testMap;
+	_testMap.InitialiseMap();
+
+	//Place obj 1 into grid
+	output = _testMap.PlaceIntoGrid(temp1, temp1->GetPosition());
+	std::cout << "Placement of 1: " << output << std::endl;
+
+	//Check if grid is occupied for obj 0
+	std::string objid = temp->GetObjectID();
+	temp->GetPixelOccupancy(pixel_occupancy);
+	position = temp->GetPosition();
+	output = _testMap.IsOccupied(temp, position);
+	std::cout << "Checking from 0: " << output << std::endl;
+
+	//Attempt to place obj 0
+	output = _testMap.PlaceIntoGrid(temp, position);
+	std::cout << "Attempt to place 0: " <<  output << std::endl;
+	/*
+	 = _testMap.IsOccupied(pixel_occupancy, position, objid);
 	std::cout << output << std::endl;
 	_testMap.RemoveFromGrid(temp, position);
-	output = _testMap.IsOccupied(pixel_occupancy, position);
+	output = _testMap.IsOccupied(pixel_occupancy, position, objid);
 	std::cout << output << std::endl;
 	*/
 
-	/* PIXEL OCCUPANCY
+	// PIXEL OCCUPANCY
 	std::string pixel_array[16][16];
-	temp->GetPixelOccupancy(pixel_array);
+	temp2->GetPixelOccupancy(pixel_array);
 	for (int i = 0; i < 16; i++) {
 		for (int j = 0; j < 16; j++) {
 			std::cout << pixel_array[i][j] << " ";
 		}
 		std::cout << std::endl;
 	}
-	*/
+	
 
 	return;
 }
