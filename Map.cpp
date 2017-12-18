@@ -5,7 +5,8 @@
 //Constructor - Initialises the size of the occupancy grid
 Map::Map() :
 	_is_initialised(false),
-	_occupancy_grid(new std::string[400 * 400])
+	_occupancy_grid(new std::string[400 * 400]),
+	_occupancy_grid_length(-1)
 {
 	/*_occupancy_grid = new std::string[_occupancy_grid_length * _occupancy_grid_length];
 	for (int i = 0; i < 1000; i++) {

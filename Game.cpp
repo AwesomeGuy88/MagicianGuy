@@ -114,26 +114,12 @@ bool Game::IsExiting(void)
 
 void Game::InitialiseObjects()
 {
-	
-	SpriteBackground* test3 = new SpriteBackground();
-	test3->SetPosition(90, 30, fOrigin_x, fOrigin_y);
-	_gameObjectManager0.Add("testing", test3);
-
-	SpriteBackground* test2 = new SpriteBackground();
-	test2->SetPosition(90, -90, fOrigin_x, fOrigin_y);
-	_gameObjectManager1.Add("testing1", test2);
 
 	SpriteUser* test1 = new SpriteUser();
 	test1->SetPosition(0, 0, fOrigin_x, fOrigin_y);
 	test1->SetObjectID("User");
 	_gameObjectManager1.Add("testing2", test1);
 
-	SpriteObstacle* test4 = new SpriteObstacle();
-	test4->Load("ArtAssets/Environment/Wall7.fw.png");
-	test4->SetPosition(90, 60, fOrigin_x, fOrigin_y);
-	test4->SetObjectID("ob01");
-	_gameObjectManager2.Add("testing4", test4);
-	_map.PlaceIntoGrid(test4, test4->GetPosition());
 
 	SpriteObstacle* test5 = new SpriteObstacle();
 	test5->Load("ArtAssets/Mage/MageLeft.fw.png");

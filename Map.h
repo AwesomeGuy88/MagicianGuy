@@ -21,7 +21,6 @@ public:
 	bool IsOccupied(SpriteObstacle* Obj, sf::Vector2f position);
 
 private:
-	//std::map<std::pair<int, int>, std::string> _occupancy_grid;
 	std::unique_ptr<std::string> _occupancy_grid;
 	int _occupancy_grid_length;
 	bool _is_initialised;

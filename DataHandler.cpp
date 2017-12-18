@@ -146,12 +146,88 @@ void DataHandler::CreateMap(GameObjectManager* _gameObjectManager, float fOrigin
 
 			switch (elements1[i].nObjectId)
 			{
-			case 0:
+			case 1:
 				temp->Load("ArtAssets/Environment/Wall1.fw.png");
 				temp->SetObjectID(elements1[i].szName);
 				break;
-			case 1:
+			case 2:
 				temp->Load("ArtAssets/Environment/Wall2.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 3:
+				temp->Load("ArtAssets/Environment/Wall3.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 4:
+				temp->Load("ArtAssets/Environment/Wall4.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 5:
+				temp->Load("ArtAssets/Environment/Wall5.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 6:
+				temp->Load("ArtAssets/Environment/Wall6.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 7:
+				temp->Load("ArtAssets/Environment/Wall7.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 8:
+				temp->Load("ArtAssets/Environment/Wall8.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 9:
+				temp->Load("ArtAssets/Environment/Wall9.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 10:
+				temp->Load("ArtAssets/Environment/Wall10.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 11:
+				temp->Load("ArtAssets/Environment/Wall11.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 12:
+				temp->Load("ArtAssets/Environment/Wall12.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 13:
+				temp->Load("ArtAssets/Environment/Wall13.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 14:
+				temp->Load("ArtAssets/Environment/Wall14.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 15:
+				temp->Load("ArtAssets/Environment/Wall15.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 16:
+				temp->Load("ArtAssets/Environment/Wall16.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 17:
+				temp->Load("ArtAssets/Environment/Wall17.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 18:
+				temp->Load("ArtAssets/Environment/Wall18.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 19:
+				temp->Load("ArtAssets/Environment/Wall19.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 20:
+				temp->Load("ArtAssets/Environment/Wall20.fw.png");
+				temp->SetObjectID(elements1[i].szName);
+				break;
+			case 21:
+				temp->Load("ArtAssets/Environment/WallSide.fw.png");
 				temp->SetObjectID(elements1[i].szName);
 				break;
 			default:
