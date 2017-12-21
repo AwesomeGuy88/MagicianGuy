@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Map.h"
+#include "SpriteBackground.h"
 
 
 //Constructor - Initialises the size of the occupancy grid
@@ -26,7 +27,8 @@ Map::~Map()
 
 //InitialiseMap - Memory for the occupancy grid is allocated by game.cpp to reduce
 //				the risk of memory leaks.
-void Map::InitialiseMap() {
+void Map::InitialiseMap() 
+{
 	//_occupancy_grid(new std::string[200 * 200]);
 	_occupancy_grid_length = 400;
 
@@ -37,6 +39,34 @@ void Map::InitialiseMap() {
 	}
 
 	_is_initialised = true;
+}
+
+
+//CreateGrass - Creates an area of grass according to specified inputs
+//	1) Loops through desired size
+//	2) Creates grass sprites and assigns to map
+void Map::CreateGrass(GameObjectManager* _gameObjectManager, float fOrigin_x, float fOrigin_y, int n_size)
+{
+	std::string sz_name;
+	int x, y = 0;
+	
+	for (int i = 0; i < n_size; i++) {
+		for (int j = 0; j < n_size; j++) {
+			SpriteBackground* temp = new SpriteBackground();
+
+			sz_name = "Grass" + std::to_string(i*n_size + j); // Set Name
+
+			temp->Load("ArtAssets/Environment/GrassTile.fw.png"); //Load Tile
+
+			x = i * 16 - (n_size * 16 / 2);
+			y = j * 16 - (n_size * 16 / 2);
+			temp->SetPosition(x, y, fOrigin_x, fOrigin_y); // Set Position
+
+
+			_gameObjectManager->Add(sz_name, temp); //Managed by GOM
+
+		}
+	}
 }
 
 

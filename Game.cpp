@@ -5,27 +5,13 @@
 #include "SpriteBackground.h"
 #include "SpriteUser.h"
 
-//To Do:
-//Object Collisions
-//Concept: Individual pixels all occupy a position on a grid. 
-//			Sets of pixels can be removed from the grid as necessary
-//			Sets of pixels can be added to the grid as necessary in a safe manner
-//			Sprites try to move their pixels, failure results in obstacle collision.
-
-//Required additions:
-// 1.) Image data can be converted to a form of pixel occupancy
-//			ADD FUNCTION TO obstacle
-// 2.) Map class which adds objects and removes objects from the grid
-// 3.) Function for moving objects to demonstrate obstacle collision
-// 4.) Load all obstacle external data into the grid
-
-//Testing:
-// Attempt to add object to the same spot on grid twice should fail
-// Attempt to add object to close position on grid should succeed
-// Behaviour of sprite should demonstrate obstacle collision
+//To Do
 
 
 
+//Restrictions
+// Obstacle Grid is currently limited in size
+// Number of obstacles that can be generated through GOM is limited
 
 //Improvements for later
 // - Explore scalability for map.cpp (Templates? data structures?)
@@ -49,10 +35,6 @@ void Game::Start(void)
 	fOrigin_y = 240;
 		//Objects
 	InitialiseObjects();
-	GameObjectManager* pGM0 = &_gameObjectManager0;
-	GameObjectManager* pGM1 = &_gameObjectManager1;
-	GameObjectManager* pGM2 = &_gameObjectManager2;
-	_dataHandler.ExtractDataAndCreate(pGM0, pGM1, pGM2, fOrigin_x, fOrigin_y);
 
 		//Control flow
 	_gameState = Playing;
@@ -115,6 +97,11 @@ bool Game::IsExiting(void)
 void Game::InitialiseObjects()
 {
 
+	GameObjectManager* pGM0 = &_gameObjectManager0;
+	GameObjectManager* pGM1 = &_gameObjectManager1;
+	GameObjectManager* pGM2 = &_gameObjectManager2;
+	_map.CreateGrass(pGM0, fOrigin_x, fOrigin_y, 20);
+
 	SpriteUser* test1 = new SpriteUser();
 	test1->SetPosition(0, 0, fOrigin_x, fOrigin_y);
 	test1->SetObjectID("User");
@@ -127,6 +114,8 @@ void Game::InitialiseObjects()
 	test5->SetObjectID("ob02");
 	_gameObjectManager2.Add("testing5", test5);
 	_map.PlaceIntoGrid(test5, test5->GetPosition());
+
+	_dataHandler.ExtractDataAndCreate(pGM0, pGM1, pGM2, fOrigin_x, fOrigin_y);
 }
 
 

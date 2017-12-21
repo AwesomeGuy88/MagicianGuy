@@ -1,6 +1,7 @@
 #pragma once
 #include "VisibleGameObject.h"
 #include "SpriteObstacle.h"
+#include "GameObjectManager.h"
 #include <memory>
 
 //To Do
@@ -14,11 +15,12 @@ public:
 	~Map();
 
 	void InitialiseMap();
+	void CreateGrass(GameObjectManager* _gameObjectManager, float fOrigin_x, float fOrigin_y, int n_size);
+
 	bool PlaceIntoGrid(SpriteObstacle* Obj, sf::Vector2f position);
 	void RemoveFromGrid(SpriteObstacle* Obj, sf::Vector2f position);
-
-
 	bool IsOccupied(SpriteObstacle* Obj, sf::Vector2f position);
+
 
 private:
 	std::unique_ptr<std::string> _occupancy_grid;

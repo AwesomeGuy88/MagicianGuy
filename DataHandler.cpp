@@ -234,9 +234,9 @@ void DataHandler::CreateMap(GameObjectManager* _gameObjectManager, float fOrigin
 				break;
 			}
 
-			temp->SetPosition(elements1[i].fX_pos, elements1[i].fY_pos, fOrigin_x, fOrigin_y);
+			temp->SetPosition(elements1[i].fX_pos * 16, elements1[i].fY_pos * 16, fOrigin_x, fOrigin_y);
 			_gameObjectManager->Add(elements1[i].szName, temp);
-			sf::Vector2f init_position(elements1[i].fX_pos, elements1[i].fY_pos);
+			sf::Vector2f init_position(elements1[i].fX_pos * 16, elements1[i].fY_pos * 16);
 			map->PlaceIntoGrid(temp, init_position);
 
 		}

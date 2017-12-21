@@ -1,15 +1,32 @@
-Wall1 14 -16 -48
-Wall2 14 16 -48
-Wall13 6 32 -59 
-Wall3 10 32 -43
-Wall14 10 43 -32
-Wall15 6 59 -32
-Wall4 20 48 -16
-Wall5 20 48 16
-Wall6 9 48 48
-Wall7 13 16 48
-Wall8 13 -16 48
-Wall9 8 -48 48
-Wall10 19 -48 16
-Wall11 19 -48 -16
-Wall12 7 -48 -48
+Wall1 5 -2 -4
+Wall2 1 -1 -4
+Wall3 1 1 -4
+Wall4 6 2 -4
+
+Wall5 5 -3 -3
+Wall6 9 -2 -3
+Wall7 2 -1 -3
+Wall8 2 1 -3
+Wall9 10 2 -3
+Wall10 6 3 -3
+
+Wall11 9 -3 -2
+Wall12 3 -2 -2
+Wall13 4 2 -2
+Wall14 10 3 -2
+
+Wall15 19 -3 -1
+Wall16 20 3 -1
+
+Wall17 17 -3 1
+Wall18 18 3 1
+
+Wall19 15 -3 2
+Wall20 11 -2 2
+Wall21 12 2 2
+Wall22 16 3 2
+
+Wall23 15 -2 3
+Wall24 13 -1 3
+Wall25 13 1 3
+Wall26 16 2 3
