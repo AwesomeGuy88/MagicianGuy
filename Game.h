@@ -37,6 +37,7 @@ private:
 	static bool IsExiting(void);
 
 	static void InitialiseObjects();
+	static void UpdateObjects();
 
 
 	enum GameState {
@@ -47,7 +48,6 @@ private:
 	static sf::RenderWindow _mainWindow;
 
 	static float fOrigin_x, fOrigin_y;
-	static std::map<std::pair<int, int>, std::string> _occupancyGrid; //For obstacle detection
 	static GameObjectManager _gameObjectManager0; //Background Layer
 	static GameObjectManager _gameObjectManager1; //Layer 1
 	static GameObjectManager _gameObjectManager2; //Layer 2

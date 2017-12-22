@@ -70,16 +70,12 @@ void SpriteUser::Update(float elapsedTime, float x_o, float y_o)
 		fx_temp += elapsedTime * 40;
 	}
 
-	//Attempt to place to grid
+	//Occupancy grid to handle collision
 	sf::Vector2f new_position = sf::Vector2f(fx_temp, fy_temp);
 	Map* map = Game::GetMap();
 	if (map->IsOccupied(this, new_position) == false) {
 		map->RemoveFromGrid(this, prev_position);
 		SetPosition(fx_temp, fy_temp, x_o, y_o);
 		map->PlaceIntoGrid(this, new_position);
-	}
-	else {
-
-		std::cout << "Failed" << std::endl;
 	}
 }

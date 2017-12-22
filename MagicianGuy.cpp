@@ -6,7 +6,7 @@
 #include "Game.h"
 #include "Testing.h"
 
-int main()
+int _tmain(int argc, _TCHAR* argv[])
 {
 	//Testing::Start();
 	Game::Start();

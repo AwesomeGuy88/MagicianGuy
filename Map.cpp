@@ -6,35 +6,28 @@
 //Constructor - Initialises the size of the occupancy grid
 Map::Map() :
 	_is_initialised(false),
-	_occupancy_grid(new std::string[400 * 400]),
 	_occupancy_grid_length(-1)
 {
-	/*_occupancy_grid = new std::string[_occupancy_grid_length * _occupancy_grid_length];
-	for (int i = 0; i < 1000; i++) {
-		for (int j = 0; j < 1000; j++) {
-			_occupancy_grid[i*_occupancy_grid_length + j] = "NULL";
-		}
-	}*/
+	_occupancy_grid = std::make_unique<std::string[]>(160000);
 }
 
 
 //Destructor
 Map::~Map()
 {
-	//delete[] _occupancy_grid;
+
 }
 
 
-//InitialiseMap - Memory for the occupancy grid is allocated by game.cpp to reduce
-//				the risk of memory leaks.
+//InitialiseMap - Members of the grid set to NULL
+//	Size of occupancy grid is currently modifiable
 void Map::InitialiseMap() 
 {
-	//_occupancy_grid(new std::string[200 * 200]);
-	_occupancy_grid_length = 400;
+	_occupancy_grid_length = 400; //Size of occupancy grid
 
 	for (int i = 0; i < _occupancy_grid_length; i++) {
 		for (int j = 0; j < _occupancy_grid_length; j++) {
-			_occupancy_grid.get()[i*_occupancy_grid_length + j] = "NULL";
+			_occupancy_grid.get()[i*_occupancy_grid_length + j] = "NULL"; //Inidividual cells set to null
 		}
 	}
 
@@ -81,34 +74,28 @@ bool Map::PlaceIntoGrid(SpriteObstacle* Obj, sf::Vector2f position)
 	std::string ObjectID;
 	std::string pixel_occupancy[16][16];
 
-	//Set Boundaries
+	//Set Boundaries (Temporary protection)
 	if ((position.x > (_occupancy_grid_length / 2)) || position.x < (-_occupancy_grid_length / 2)) {
 		return false;
 	} else if ((position.y > (_occupancy_grid_length / 2)) || position.y < (-_occupancy_grid_length / 2)) {
 		return false;
 	}
 
-	//Check occupancy
+	//Get object data
 	ObjectID = Obj->GetObjectID();
 	Obj->GetPixelOccupancy(pixel_occupancy);
-	/*if (IsOccupied(pixel_occupancy, position, ObjectID)) { 
-		std::cout << "Occupied" << std::endl;
-		return false;
-	}
-	else {*/
-	//If unoccupied then place object
-		for (int i = 0; i < 16; i++) { //Loop from top right corner
-			for (int j = 0; j < 16; j++) {
-				if (pixel_occupancy[i][j] != "NULL") {
 
-					x = (int)position.x + j + (_occupancy_grid_length / 2);
-					y = (int)position.y - i + (_occupancy_grid_length / 2);
-					_occupancy_grid.get()[y*_occupancy_grid_length + x] = ObjectID;
-					//std::cout << " grid value assigned: " << _occupancy_grid.get()[y*_occupancy_grid_length + x];
-				}
+	//Assign image data to grid
+	for (int i = 0; i < 16; i++) { 
+		for (int j = 0; j < 16; j++) {
+			if (pixel_occupancy[i][j] != "NULL") {
+				x = (int)position.x + j + (_occupancy_grid_length / 2);
+				y = (int)position.y - i + (_occupancy_grid_length / 2);
+				_occupancy_grid.get()[y*_occupancy_grid_length + x] = ObjectID;
 			}
 		}
-	//}
+	}
+
 	return true;
 }
 
@@ -117,6 +104,7 @@ bool Map::PlaceIntoGrid(SpriteObstacle* Obj, sf::Vector2f position)
 void Map::RemoveFromGrid(SpriteObstacle* Obj, sf::Vector2f position)
 {
 	int x, y;
+	std::string pixel_occupancy[16][16];
 
 	//Set Boundaries
 	if ((position.x > (_occupancy_grid_length / 2)) || position.x < (-_occupancy_grid_length / 2)) {
@@ -126,15 +114,13 @@ void Map::RemoveFromGrid(SpriteObstacle* Obj, sf::Vector2f position)
 		return;
 	}
 
-	//Get object occupancy data
-	std::string pixel_occupancy[16][16];
+	//Get object data
 	Obj->GetPixelOccupancy(pixel_occupancy);
 
-	for (int i = 0; i < 16; i++) { //Loop from top right corner
+	//Nullify image data from grid
+	for (int i = 0; i < 16; i++) {
 		for (int j = 0; j < 16; j++) {
 			if (pixel_occupancy[i][j] != "NULL") {
-
-				//Set desired cell to null
 				x = (int)position.x + j + (_occupancy_grid_length / 2);
 				y = (int)position.y - i + (_occupancy_grid_length / 2);
 				_occupancy_grid.get()[y*_occupancy_grid_length + x] = "NULL";
@@ -152,24 +138,21 @@ bool Map::IsOccupied(SpriteObstacle* Obj, sf::Vector2f position)
 	int x, y;
 	std::string ObjectID = Obj->GetObjectID();
 	std::string pixel_occupancy[16][16];
+
+	//Get object data
 	Obj->GetPixelOccupancy(pixel_occupancy);
-	//Loop through all occupancy pixels starting from the top right corner
+
+	//Check if desired cells are occupied
 	for (int i = 0; i < 16; i++) { //Rows
 		for (int j = 0; j < 16; j++) {
-
-			//If desired occupancy conflicts with occupied space then return
 			if (pixel_occupancy[i][j] != "NULL") {
-				
 				x = (int)position.x + j + (_occupancy_grid_length / 2);
 				y = (int)position.y - i + (_occupancy_grid_length / 2);
-				//std::cout << "NOTNULL?: " << (_occupancy_grid.get()[y*_occupancy_grid_length + x] != "NULL")
-				//	<< "  NOTOBJID?: " << (_occupancy_grid.get()[y*_occupancy_grid_length + x] != ObjectID) << std::endl
-					//<< "  ObjID: " << _occupancy_grid.get()[y*_occupancy_grid_length + x] << std::endl;
 				
 				if ((_occupancy_grid.get()[y*_occupancy_grid_length + x] != "NULL") && 
-					(_occupancy_grid.get()[y*_occupancy_grid_length + x] != ObjectID) &&  //Desired position is occupied
+					(_occupancy_grid.get()[y*_occupancy_grid_length + x] != ObjectID) && 
 					(_occupancy_grid.get()[y*_occupancy_grid_length + x] != "")) {
-					return true;
+					return true;  //Desired position is occupied
 				}
 			}
 		}

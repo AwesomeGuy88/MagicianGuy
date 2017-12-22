@@ -10,7 +10,7 @@
 void Testing::Start(void)
 {
 	//Initialisation
-	GameObjectManager _gameObjectManager1; //GameObject manager required to prevent memory leaks
+	GameObjectManager _gameObjectManager1;
 
 	//Creating Sprites for testing
 	SpriteObstacle* temp = new SpriteObstacle();

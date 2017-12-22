@@ -12,7 +12,7 @@
 class Map {
 public:
 	Map();
-	~Map();
+	virtual ~Map();
 
 	void InitialiseMap();
 	void CreateGrass(GameObjectManager* _gameObjectManager, float fOrigin_x, float fOrigin_y, int n_size);
@@ -23,7 +23,7 @@ public:
 
 
 private:
-	std::unique_ptr<std::string> _occupancy_grid;
+	std::unique_ptr<std::string[]> _occupancy_grid;
 	int _occupancy_grid_length;
 	bool _is_initialised;
 };

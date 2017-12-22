@@ -56,23 +56,28 @@ void Game::Start(void)
 //GameLoop - For regularly updating the game.
 void Game::GameLoop(void)
 {
+	sf::Event currentEvent;
+	_mainWindow.pollEvent(currentEvent);
+
 
 	switch (_gameState)
 	{
 	case Playing:
 		_mainWindow.clear(sf::Color(0, 0, 0));
 
-		//Background Layer
-		_gameObjectManager0.UpdateAll();
-		_gameObjectManager0.DrawAll(_mainWindow);
-		//Layer 1
-		_gameObjectManager1.UpdateAll();
-		_gameObjectManager1.DrawAll(_mainWindow);
-		//Layer 2
-		_gameObjectManager2.UpdateAll();
-		_gameObjectManager2.DrawAll(_mainWindow);
+		UpdateObjects();
 
 		_mainWindow.display();
+
+		if (currentEvent.type == sf::Event::Closed)
+		{
+			_gameState = Game::Exiting;
+		}
+		if (currentEvent.type == sf::Event::KeyPressed)
+		{
+			if (currentEvent.key.code == sf::Keyboard::Escape)
+				_gameState = Game::Exiting;
+		}
 		
 		break;
 	default:
@@ -91,7 +96,9 @@ bool Game::IsExiting(void)
 	if (_gameState == Exiting) {
 		return true;
 	}
-	return false;
+	else {
+		return false;
+	}
 }
 
 void Game::InitialiseObjects()
@@ -116,6 +123,19 @@ void Game::InitialiseObjects()
 	_map.PlaceIntoGrid(test5, test5->GetPosition());
 
 	_dataHandler.ExtractDataAndCreate(pGM0, pGM1, pGM2, fOrigin_x, fOrigin_y);
+}
+
+void Game::UpdateObjects()
+{
+	//Background Layer
+	_gameObjectManager0.UpdateAll();
+	_gameObjectManager0.DrawAll(_mainWindow);
+	//Layer 1
+	_gameObjectManager1.UpdateAll();
+	_gameObjectManager1.DrawAll(_mainWindow);
+	//Layer 2
+	_gameObjectManager2.UpdateAll();
+	_gameObjectManager2.DrawAll(_mainWindow);
 }
 
 
@@ -169,7 +189,6 @@ sf::RenderWindow Game::_mainWindow;
 Game::GameState Game::_gameState;
 float Game::fOrigin_x;
 float Game::fOrigin_y;
-std::map<std::pair<int, int>, std::string> Game::_occupancyGrid;
 sf::Clock Game::clock;
 GameObjectManager Game::_gameObjectManager0;
 GameObjectManager Game::_gameObjectManager1;
