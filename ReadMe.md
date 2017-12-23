@@ -40,4 +40,5 @@ Currently finished:
 * Coordinate System
 * Moving sprite
 * Creating objects from data in external files
-* Obstacle interaction (In Progress)
+* Obstacle interaction
+* Menu (In Progress)

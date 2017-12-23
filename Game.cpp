@@ -15,6 +15,7 @@
 
 //Improvements for later
 // - Explore scalability for map.cpp (Templates? data structures?)
+// - Tidying up coordinate system
 
 
 //Start - For setting up resources and containing the game
@@ -25,7 +26,9 @@ void Game::Start(void)
 	
 	//Set up game resources
 		//Main window
-	_mainWindow.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 4), "Magician Guy");
+	_mainWindow.create(sf::VideoMode::getDesktopMode(), "Magician Guy"), sf::Style::Fullscreen);
+	sf::View view(sf::FloatRect(0, 0, 640, 480));
+	_mainWindow.setView(view);
 		//Map
 	
 
